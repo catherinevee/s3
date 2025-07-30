@@ -278,3 +278,13 @@ variable "object_lock_configuration" {
   })
   default = null
 } 
+# ==============================================================================
+# Enhanced S3 Configuration Variables
+# ==============================================================================
+
+variable "force_destroy" {
+  description = "Whether to force destroy the bucket even if it contains objects"
+  type        = bool
+  default     = false
+}
+
