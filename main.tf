@@ -1,18 +1,19 @@
 # S3 Bucket Module
 # This module creates an S3 bucket with comprehensive security and lifecycle configurations
 
+# Data source for current region
+data "aws_region" "current" {}
+
 # S3 Bucket
 resource "aws_s3_bucket" "this" {
   bucket = var.bucket_name
 
-  tags = merge(
-    var.common_tags,
-    {
-      Name        = var.bucket_name
-      Environment = var.environment
-      Purpose     = var.purpose
-    }
-  )
+  # Prevent accidental deletion
+  lifecycle {
+    prevent_destroy = var.prevent_destroy
+  }
+
+  tags = local.computed_tags
 }
 
 # S3 Bucket Versioning

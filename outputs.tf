@@ -25,6 +25,11 @@ output "bucket_region" {
   value       = aws_s3_bucket.this.region
 }
 
+output "bucket_url" {
+  description = "The URL of the bucket"
+  value       = local.bucket_url
+}
+
 output "bucket_website_endpoint" {
   description = "The website endpoint, if the bucket is configured with a website"
   value       = try(aws_s3_bucket_website_configuration.this[0].website_endpoint, null)
@@ -58,6 +63,7 @@ output "bucket_encryption_algorithm" {
 output "bucket_kms_key_id" {
   description = "The KMS key ID used for encryption"
   value       = aws_s3_bucket_server_side_encryption_configuration.this.rule[0].apply_server_side_encryption_by_default[0].kms_master_key_id
+  sensitive   = true
 }
 
 output "bucket_key_enabled" {

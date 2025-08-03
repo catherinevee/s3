@@ -59,6 +59,11 @@ variable "kms_key_id" {
   description = "The KMS master key ID for encryption (required when encryption_algorithm is 'aws:kms')"
   type        = string
   default     = null
+
+  validation {
+    condition = var.kms_key_id == null || can(regex("^arn:aws:kms:", var.kms_key_id))
+    error_message = "KMS key ID must be a valid ARN starting with 'arn:aws:kms:'"
+  }
 }
 
 variable "bucket_key_enabled" {
@@ -284,6 +289,12 @@ variable "object_lock_configuration" {
 
 variable "force_destroy" {
   description = "Whether to force destroy the bucket even if it contains objects"
+  type        = bool
+  default     = false
+}
+
+variable "prevent_destroy" {
+  description = "Prevent destruction of the bucket (use with caution)"
   type        = bool
   default     = false
 }

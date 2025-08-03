@@ -15,6 +15,7 @@ help:
 	@echo "  lint      - Lint Terraform code"
 	@echo "  clean     - Clean up temporary files"
 	@echo "  test      - Run tests"
+	@echo "  test-native - Run Terraform native tests"
 	@echo "  examples  - Run examples"
 
 # Initialize Terraform
@@ -63,6 +64,15 @@ test:
 		cd test && go test -v -timeout 30m; \
 	else \
 		echo "Go not found. Install Go to run tests."; \
+	fi
+
+# Run Terraform native tests
+test-native:
+	@echo "Running Terraform native tests..."
+	@if command -v terraform >/dev/null 2>&1; then \
+		terraform test test/; \
+	else \
+		echo "Terraform not found."; \
 	fi
 
 # Run examples

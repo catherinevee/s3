@@ -273,6 +273,27 @@ module "s3_bucket" {
 | bucket_object_lock_configuration | The object lock configuration of the bucket |
 | bucket_tags | A mapping of tags assigned to the bucket |
 
+## Resource Map
+
+This module creates the following AWS resources:
+
+| Resource | Type | Purpose |
+|----------|------|---------|
+| `aws_s3_bucket.this` | S3 Bucket | Main S3 bucket resource |
+| `aws_s3_bucket_versioning.this` | S3 Bucket Versioning | Enables/disables versioning |
+| `aws_s3_bucket_server_side_encryption_configuration.this` | S3 Bucket Encryption | Configures server-side encryption |
+| `aws_s3_bucket_public_access_block.this` | S3 Bucket Public Access Block | Blocks public access |
+| `aws_s3_bucket_ownership_controls.this` | S3 Bucket Ownership Controls | Sets object ownership |
+| `aws_s3_bucket_acl.this` | S3 Bucket ACL | Sets bucket ACL (conditional) |
+| `aws_s3_bucket_lifecycle_configuration.this` | S3 Bucket Lifecycle | Manages object lifecycle (conditional) |
+| `aws_s3_bucket_cors_configuration.this` | S3 Bucket CORS | Configures CORS rules (conditional) |
+| `aws_s3_bucket_website_configuration.this` | S3 Bucket Website | Configures website hosting (conditional) |
+| `aws_s3_bucket_notification.this` | S3 Bucket Notification | Sets up event notifications (conditional) |
+| `aws_s3_bucket_policy.this` | S3 Bucket Policy | Applies bucket policy (conditional) |
+| `aws_s3_bucket_replication_configuration.this` | S3 Bucket Replication | Configures replication (conditional) |
+| `aws_s3_bucket_intelligent_tiering_configuration.this` | S3 Bucket Intelligent Tiering | Sets up intelligent tiering (conditional) |
+| `aws_s3_bucket_object_lock_configuration.this` | S3 Bucket Object Lock | Configures object lock (conditional) |
+
 ## Security Best Practices
 
 ### 1. Encryption
