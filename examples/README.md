@@ -1,11 +1,11 @@
 # S3 Module Examples
 
-This directory contains practical examples of how to use the S3 module for different use cases.
+Practical examples of using the S3 module for different use cases.
 
 ## Examples Overview
 
 ### 1. [Basic](./basic/)
-A simple S3 bucket with default security settings. This is the most basic usage of the module.
+Simple S3 bucket with default security settings.
 
 **Features:**
 - Default encryption (AES256)

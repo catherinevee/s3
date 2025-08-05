@@ -1,24 +1,24 @@
 # AWS S3 Bucket Terraform Module
 
-A comprehensive Terraform module for creating AWS S3 buckets with advanced configurations including encryption, versioning, lifecycle policies, CORS, website hosting, and more.
+Terraform module for creating AWS S3 buckets with enterprise security, compliance, and cost optimization features.
 
 ## Features
 
-- ✅ **Security by Default**: Public access blocked, encryption enabled
-- ✅ **Versioning Support**: Configurable bucket versioning
-- ✅ **Lifecycle Management**: Automated object transitions and expiration
-- ✅ **CORS Configuration**: Cross-origin resource sharing support
-- ✅ **Website Hosting**: Static website hosting capabilities
-- ✅ **Event Notifications**: Lambda, SQS, and SNS notifications
-- ✅ **Replication**: Cross-region and same-region replication
-- ✅ **Intelligent Tiering**: Cost optimization with automatic tiering
-- ✅ **Object Lock**: WORM (Write Once Read Many) compliance
-- ✅ **Access Control**: Flexible ACL and ownership controls
-- ✅ **Monitoring**: Comprehensive outputs for monitoring
+- Security by default with public access blocked and encryption enabled
+- Versioning support for data protection
+- Lifecycle management for automated object transitions
+- CORS configuration for cross-origin resource sharing
+- Static website hosting capabilities
+- Event notifications for Lambda, SQS, and SNS
+- Cross-region and same-region replication
+- Intelligent tiering for cost optimization
+- Object lock for WORM compliance
+- Flexible ACL and ownership controls
+- Comprehensive monitoring outputs
 
 ## Usage
 
-### Basic Usage
+### Basic Bucket
 
 ```hcl
 module "s3_bucket" {
@@ -36,7 +36,7 @@ module "s3_bucket" {
 }
 ```
 
-### Advanced Usage with All Features
+### Advanced Bucket with All Features
 
 ```hcl
 module "s3_bucket" {
@@ -213,122 +213,116 @@ module "s3_bucket" {
 | terraform | >= 1.0 |
 | aws | >= 5.0 |
 
-## Providers
-
-| Name | Version |
-|------|---------|
-| aws | >= 5.0 |
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| bucket_name | The name of the S3 bucket | `string` | n/a | yes |
-| environment | Environment name (e.g., dev, staging, prod) | `string` | `"dev"` | no |
-| purpose | Purpose of the S3 bucket | `string` | `"storage"` | no |
-| common_tags | Common tags to apply to all resources | `map(string)` | `{}` | no |
-| enable_versioning | Enable versioning for the S3 bucket | `bool` | `true` | no |
-| encryption_algorithm | The server-side encryption algorithm to use | `string` | `"AES256"` | no |
-| kms_key_id | The KMS master key ID for encryption | `string` | `null` | no |
-| bucket_key_enabled | Whether or not to use Amazon S3 Bucket Keys for SSE-KMS | `bool` | `false` | no |
-| block_public_acls | Whether Amazon S3 should block public ACLs for this bucket | `bool` | `true` | no |
-| block_public_policy | Whether Amazon S3 should block public bucket policies for this bucket | `bool` | `true` | no |
-| ignore_public_acls | Whether Amazon S3 should ignore public ACLs for this bucket | `bool` | `true` | no |
-| restrict_public_buckets | Whether Amazon S3 should restrict public bucket policies for this bucket | `bool` | `true` | no |
-| object_ownership | Object ownership setting for the bucket | `string` | `"BucketOwnerPreferred"` | no |
-| acl | The canned ACL to apply to the bucket | `string` | `null` | no |
-| lifecycle_rules | List of lifecycle rules for the bucket | `list(object)` | `[]` | no |
-| cors_rules | List of CORS rules for the bucket | `list(object)` | `[]` | no |
-| website_configuration | Website configuration for the bucket | `object` | `null` | no |
-| notification_configuration | Notification configuration for the bucket | `object` | `null` | no |
-| bucket_policy | The bucket policy as a JSON string | `string` | `null` | no |
-| replication_configuration | Replication configuration for the bucket | `object` | `null` | no |
-| intelligent_tiering_configurations | Intelligent tiering configurations for the bucket | `list(object)` | `[]` | no |
-| object_lock_configuration | Object lock configuration for the bucket | `object` | `null` | no |
+| bucket_name | S3 bucket name | `string` | n/a | yes |
+| environment | Environment name | `string` | `"dev"` | no |
+| purpose | Bucket purpose | `string` | `"storage"` | no |
+| common_tags | Common resource tags | `map(string)` | `{}` | no |
+| enable_versioning | Enable bucket versioning | `bool` | `true` | no |
+| encryption_algorithm | Server-side encryption algorithm | `string` | `"AES256"` | no |
+| kms_key_id | KMS master key ID | `string` | `null` | no |
+| bucket_key_enabled | Enable bucket keys for SSE-KMS | `bool` | `false` | no |
+| block_public_acls | Block public ACLs | `bool` | `true` | no |
+| block_public_policy | Block public bucket policies | `bool` | `true` | no |
+| ignore_public_acls | Ignore public ACLs | `bool` | `true` | no |
+| restrict_public_buckets | Restrict public bucket policies | `bool` | `true` | no |
+| object_ownership | Object ownership setting | `string` | `"BucketOwnerPreferred"` | no |
+| acl | Canned ACL to apply | `string` | `null` | no |
+| lifecycle_rules | Lifecycle rules | `list(object)` | `[]` | no |
+| cors_rules | CORS rules | `list(object)` | `[]` | no |
+| website_configuration | Website configuration | `object` | `null` | no |
+| notification_configuration | Notification configuration | `object` | `null` | no |
+| bucket_policy | Bucket policy JSON | `string` | `null` | no |
+| replication_configuration | Replication configuration | `object` | `null` | no |
+| intelligent_tiering_configurations | Intelligent tiering configs | `list(object)` | `[]` | no |
+| object_lock_configuration | Object lock configuration | `object` | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| bucket_id | The name of the bucket |
-| bucket_arn | The ARN of the bucket |
-| bucket_domain_name | The bucket domain name |
-| bucket_regional_domain_name | The bucket region-specific domain name |
-| bucket_region | The AWS region this bucket resides in |
-| bucket_website_endpoint | The website endpoint, if the bucket is configured with a website |
-| bucket_website_domain | The domain of the website endpoint, if the bucket is configured with a website |
-| bucket_versioning_status | The versioning state of the bucket |
-| bucket_encryption_algorithm | The server-side encryption algorithm used |
-| bucket_kms_key_id | The KMS key ID used for encryption |
-| bucket_key_enabled | Whether bucket keys are enabled for SSE-KMS |
-| bucket_public_access_block_configuration | The public access block configuration |
-| bucket_ownership_controls | The bucket ownership controls |
-| bucket_acl | The canned ACL applied to the bucket |
-| bucket_lifecycle_configuration | The lifecycle configuration of the bucket |
-| bucket_cors_configuration | The CORS configuration of the bucket |
-| bucket_notification_configuration | The notification configuration of the bucket |
-| bucket_policy | The bucket policy |
-| bucket_replication_configuration | The replication configuration of the bucket |
-| bucket_intelligent_tiering_configurations | The intelligent tiering configurations of the bucket |
-| bucket_object_lock_configuration | The object lock configuration of the bucket |
-| bucket_tags | A mapping of tags assigned to the bucket |
+| bucket_id | Bucket name |
+| bucket_arn | Bucket ARN |
+| bucket_domain_name | Bucket domain name |
+| bucket_regional_domain_name | Bucket region-specific domain name |
+| bucket_region | AWS region |
+| bucket_website_endpoint | Website endpoint |
+| bucket_website_domain | Website domain |
+| bucket_versioning_status | Versioning state |
+| bucket_encryption_algorithm | Encryption algorithm |
+| bucket_kms_key_id | KMS key ID |
+| bucket_key_enabled | Bucket keys enabled |
+| bucket_public_access_block_configuration | Public access block config |
+| bucket_ownership_controls | Ownership controls |
+| bucket_acl | Canned ACL |
+| bucket_lifecycle_configuration | Lifecycle configuration |
+| bucket_cors_configuration | CORS configuration |
+| bucket_notification_configuration | Notification configuration |
+| bucket_policy | Bucket policy |
+| bucket_replication_configuration | Replication configuration |
+| bucket_intelligent_tiering_configurations | Intelligent tiering configs |
+| bucket_object_lock_configuration | Object lock configuration |
+| bucket_tags | Resource tags |
 
-## Resource Map
+## Resource Architecture
 
 This module creates the following AWS resources:
 
 | Resource | Type | Purpose |
 |----------|------|---------|
-| `aws_s3_bucket.this` | S3 Bucket | Main S3 bucket resource |
-| `aws_s3_bucket_versioning.this` | S3 Bucket Versioning | Enables/disables versioning |
-| `aws_s3_bucket_server_side_encryption_configuration.this` | S3 Bucket Encryption | Configures server-side encryption |
-| `aws_s3_bucket_public_access_block.this` | S3 Bucket Public Access Block | Blocks public access |
-| `aws_s3_bucket_ownership_controls.this` | S3 Bucket Ownership Controls | Sets object ownership |
-| `aws_s3_bucket_acl.this` | S3 Bucket ACL | Sets bucket ACL (conditional) |
-| `aws_s3_bucket_lifecycle_configuration.this` | S3 Bucket Lifecycle | Manages object lifecycle (conditional) |
-| `aws_s3_bucket_cors_configuration.this` | S3 Bucket CORS | Configures CORS rules (conditional) |
-| `aws_s3_bucket_website_configuration.this` | S3 Bucket Website | Configures website hosting (conditional) |
-| `aws_s3_bucket_notification.this` | S3 Bucket Notification | Sets up event notifications (conditional) |
-| `aws_s3_bucket_policy.this` | S3 Bucket Policy | Applies bucket policy (conditional) |
-| `aws_s3_bucket_replication_configuration.this` | S3 Bucket Replication | Configures replication (conditional) |
-| `aws_s3_bucket_intelligent_tiering_configuration.this` | S3 Bucket Intelligent Tiering | Sets up intelligent tiering (conditional) |
-| `aws_s3_bucket_object_lock_configuration.this` | S3 Bucket Object Lock | Configures object lock (conditional) |
+| `aws_s3_bucket.this` | S3 Bucket | Main S3 bucket |
+| `aws_s3_bucket_versioning.this` | S3 Bucket Versioning | Versioning control |
+| `aws_s3_bucket_server_side_encryption_configuration.this` | S3 Bucket Encryption | Server-side encryption |
+| `aws_s3_bucket_public_access_block.this` | S3 Bucket Public Access Block | Public access control |
+| `aws_s3_bucket_ownership_controls.this` | S3 Bucket Ownership Controls | Object ownership |
+| `aws_s3_bucket_acl.this` | S3 Bucket ACL | Bucket ACL |
+| `aws_s3_bucket_lifecycle_configuration.this` | S3 Bucket Lifecycle | Object lifecycle |
+| `aws_s3_bucket_cors_configuration.this` | S3 Bucket CORS | CORS rules |
+| `aws_s3_bucket_website_configuration.this` | S3 Bucket Website | Website hosting |
+| `aws_s3_bucket_notification.this` | S3 Bucket Notification | Event notifications |
+| `aws_s3_bucket_policy.this` | S3 Bucket Policy | Bucket policy |
+| `aws_s3_bucket_replication_configuration.this` | S3 Bucket Replication | Replication |
+| `aws_s3_bucket_intelligent_tiering_configuration.this` | S3 Bucket Intelligent Tiering | Cost optimization |
+| `aws_s3_bucket_object_lock_configuration.this` | S3 Bucket Object Lock | WORM compliance |
 
 ## Security Best Practices
 
-### 1. Encryption
+### Encryption
 - Always enable server-side encryption (default: AES256)
 - Use KMS keys for additional security when required
 - Enable bucket keys for SSE-KMS to reduce API costs
 
-### 2. Access Control
+### Access Control
 - Block all public access by default
 - Use bucket policies for fine-grained access control
 - Implement proper IAM roles and policies
 
-### 3. Versioning and Object Lock
+### Versioning and Object Lock
 - Enable versioning for data protection
 - Use object lock for compliance requirements
 - Implement lifecycle policies for cost management
 
-### 4. Monitoring and Logging
+### Monitoring and Logging
 - Enable access logging to track bucket usage
 - Set up CloudTrail for API call monitoring
 - Use CloudWatch metrics for performance monitoring
 
 ## Cost Optimization
 
-### 1. Lifecycle Policies
+### Lifecycle Policies
 - Transition objects to cheaper storage classes
 - Delete old versions and incomplete multipart uploads
 - Use intelligent tiering for automatic cost optimization
 
-### 2. Storage Classes
+### Storage Classes
 - Use appropriate storage classes based on access patterns
 - Consider S3 Intelligent Tiering for unknown access patterns
 - Use S3 One Zone-IA for non-critical data
 
-### 3. Replication
+### Replication
 - Only replicate necessary data
 - Use appropriate storage classes in destination buckets
 - Consider same-region replication for compliance
@@ -353,7 +347,7 @@ See the `examples/` directory for additional usage examples:
 
 ## License
 
-This module is licensed under the MIT License. See LICENSE for full details.
+MIT License - see [LICENSE](LICENSE) for details.
 
 ## Support
 
