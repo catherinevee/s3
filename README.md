@@ -1,6 +1,6 @@
 # AWS S3 Bucket Terraform Module
 
-Terraform module for creating AWS S3 buckets with enterprise security, compliance, and cost optimization features.
+Terraform module for creating AWS S3 buckets with security, compliance, and cost optimization features.
 
 ## Features
 
@@ -14,7 +14,7 @@ Terraform module for creating AWS S3 buckets with enterprise security, complianc
 - Intelligent tiering for cost optimization
 - Object lock for WORM compliance
 - Flexible ACL and ownership controls
-- Comprehensive monitoring outputs
+- Monitoring outputs
 
 ## Usage
 

@@ -1,5 +1,5 @@
 # S3 Bucket Module
-# This module creates an S3 bucket with comprehensive security and lifecycle configurations
+# This module creates an S3 bucket with security and lifecycle configurations
 
 # Data source for current region
 data "aws_region" "current" {}
